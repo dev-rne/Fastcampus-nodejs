@@ -2,6 +2,8 @@ const express = require('express');
 const nunjucks = require('nunjucks');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const db = require('./models');
+
 class App{
     constructor(){
         this.app = express();
@@ -26,6 +28,9 @@ class App{
 
         //에러 처리
         this.errorHandler()
+
+         // db 접속
+         this.dbConnection();
     }
 
     setMiddleWare(){
@@ -67,6 +72,21 @@ class App{
         this.app.use((err, req, res, _) => {
             res.status(500).render('common/500.html')
         })
+    }
+
+    dbConnection(){
+        // DB authentication
+        db.sequelize.authenticate()
+        .then(() => {
+            console.log('Connection has been established successfully.');
+        })
+        .then(() => {
+            console.log('DB Sync complete.');
+            return db.sequelize.sync();
+        })
+        .catch(err => {
+            console.error('Unable to connect to the database:', err);
+        });
     }
 }
 
