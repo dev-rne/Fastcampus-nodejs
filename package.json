@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "express exercise",
   "scripts": {
-    "start": "npx nodemon -e js,html app.js"
+    "start": "npx nodemon -e js,html server.js"
   },
   "keywords": [],
   "author": "",
