@@ -1,24 +1,19 @@
-const { Router } = require('express')
+const { Router } = require('express');
 const router = Router();
-const ctrl = require('./admin.ctrl')
+const ctrl = require('./admin.ctrl');
 
-function testMiddleware(req, res, next){
-    console.log('first midddleware');
-    next()
-}
-function testMiddleware2(req, res, next){
-    console.log('second midddleware');
-    next()
-}
+router.get('/products', ctrl.get_products );
 
-router.get('/', testMiddleware, testMiddleware2, (req, res) => {
-    res.send('admin app')
-})
+router.get('/products/write', ctrl.get_products_write );
 
-router.get('/products', ctrl.get_products);
+router.post('/products/write', ctrl.post_products_write );
 
-router.get('/products/write', ctrl.get_products_write);
+router.get('/products/detail/:id', ctrl.get_products_detail );
 
-router.post('/products/write', ctrl.post_products_write);
+router.get('/products/edit/:id', ctrl.get_products_edit );
+
+router.post('/products/edit/:id', ctrl.post_products_edit );
+
+router.get('/products/delete/:id', ctrl.get_products_delete );
 
 module.exports = router;
