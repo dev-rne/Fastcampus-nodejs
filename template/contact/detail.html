@@ -1,0 +1,28 @@
+{% set title = "관리자 : 상세페이지" %}
+{% extends "layout/contactBase.html" %}
+
+{% block content -%}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ user.user }}
+        </div>
+        <div class="panel-body">
+            <div style="padding-bottom: 10px">
+                작성일 : {{ user.dateFormat(user.createdAt) }}
+            </div>
+            <div style="padding-bottom: 10px">
+                전화번호 :{{ user.number }}
+            </div>
+            <div >
+                성별 :{{ user.gender }}
+            </div>
+
+        </div>
+    </div>
+
+    <a href="/contact/userlist" class="btn btn-default">목록으로</a>
+    <a href="/contact/userlist/edit/{{ user.id }}" class="btn btn-primary">수정</a>
+
+
+
+{% endblock %}
